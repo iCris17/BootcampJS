@@ -7,9 +7,58 @@
     <title>Bootcamp - JavaScript 001</title>
 </head>
 <body>
-    <h1>Bootcamp JavaScript</h1>
-    <p>¡Bienvenidos!</p>
-    <p>Bootcamp</p>
-    <script src="index.js"></script>
+    <form action="index.html"> <!--El action indica a qué archivo se va a enviar el formulario-->
+        <input type="hidden" name="codigo" id="codigo"><!--Input que el usuario no puede ver, usado sólo para propósitos de programación-->
+        <div>
+            <label for="nombre">Nombre</label>
+            <input type="text" autofocus name="nombre" id="nombre"><!--El autofocus es para que al iniciar el navegador, se haga focus al campo de nombre-->
+        </div>
+        <div>
+            <label for="cantidad">Cantidad</label>
+            <input type="text" name="cantidad" id="cantidad">
+        </div>
+        <div>
+            <label for="precio">Precio</label>
+            <input type="text" name="precio" id="precio">
+        </div>
+        <div>
+            <label for="categoria">Categoría</label>
+            <select name="categoria" id="categoria"> <!--En un select, siempre se incluyen opciones, y se les agrega un 'value'-->
+                <option value="1">Categoría 1</option>
+                <option value="2">Categoría 2</option>
+                <option value="3">Categoría 3</option>
+                <option value="4">Categoría 4</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit">Guardar</button><!--Botón de tipo submit, para enviar un formulario-->
+        </div>
+    </form>
+    
+    <div>
+        <table><!--Creando la tabla-->
+            <thead><!--Encabezado de la tabla-->
+                <tr><!--Etiqueta que indica una fila de la tabla-->
+                    <td>Código</td><!--Etiqueta que indica una celda de la tabla-->
+                    <td>Nombre</td>
+                    <td>Cantidad</td>
+                    <td>Precio</td>
+                    <td>Total</td>
+                </tr>
+            </thead>
+            <tbody><!--Cuerpo de la tabla que se usó de forma dinámica en el index.js-->
+            </tbody>
+            <tfoot><!--Footer de la tabla-->
+                <tr>
+                    <td colspan="2">Totales</td>
+                    <td id="cantidadTotal">0</td>
+                    <td id="precioTotal">0</td>
+                    <td id="granTotal">0</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <script src="index.js"></script><!--Todo el insertado de datos dinámico funciona gracias al uso del index.js, y se declaró así-->
 </body>
 </html>
