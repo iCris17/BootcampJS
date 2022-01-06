@@ -1,0 +1,4 @@
+//Archivo creado para poder usar babel/preset
+{
+    "presets": ["@babel/preset-env", "@babel/preset-react"]
+}

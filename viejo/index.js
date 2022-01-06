@@ -73,7 +73,16 @@ function onSubmit(event)//Se van a quitar las características por defecto del s
         <td>${cantidad}</td>
         <td>${precio}</td>
         <td>${total}</td>
-        <td><a href="#" onclick="onEdit(event)">Editar</a> | <a href="#" onclick="onDelete(event)">Eliminar</a></td>
+        <td>
+            <div class="btn-group">
+                <a title="Editar" href="#" onclick="onEdit(event)" class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+                <a title="Eliminar" href="#" onclick="onDelete(event)" class="btn btn-sm btn-outline-danger">
+                    <i class="bi bi-trash"></i>
+                </a>
+            </div>
+        </td>
     `;//En los botones Editar y Eliminar (ambos con hipervínculo), el evento onclick llama a las funciones onEdit() y onDelete() respectivamente, enviando
     //el evento que en este caso es un click.
     //Generar HTML con la nueva fila dinámicamente
@@ -81,7 +90,6 @@ function onSubmit(event)//Se van a quitar las características por defecto del s
     cantidadTotalElement.innerText = cantidadTotal;//Asignar texto de cantidad total a la celda de cantidad total
     precioTotalElement.innerText = preciosTotales;//Asignar texto de precio total a la celda de precio total
     granTotalElement.innerText = granTotal;//Asignar texto de gran total a la celda de gran total
-
     form.reset();//Limpiar todo el formulario
     fnombre.focus();//Hacer focus de nuevo al campo nombre cuando se inserta/edita
 }
@@ -94,8 +102,8 @@ function onEdit(event)//Función para editar que se suscribe a un evento y recib
     event.preventDefault();//Evita acciones como refrescar la página o sobreescribir el link
 
     /** @type {HTMLAnchorElement} *///Indicar y documentar el tipo de dato de la siguiente variable
-    const anchor = event.target;//Anclar al evento (parámetro) recibido
-    const tr = anchor.parentElement.parentElement;//Se obtiene el padre del padre, que sería el tag <tr>, la sucesión sería así: <a> -> <td> -> <tr>
+    const anchor = event.currentTarget;//Anclar al evento (parámetro) recibido, pero se ancla a la etiqueta que recibe el evento
+    const tr = anchor.parentElement.parentElement.parentElement;//Se obtiene el padre del padre, que sería el tag <tr>, la sucesión sería así: <a> -> <td> -> <tr>
     const celdas = tr.getElementsByTagName("td");//Obtener todos los tag 'td' del tr que se quiere editar
     const [tdCodigo, tdNombre, tdCantidad, tdPrecio] = celdas;//Se crea un vector, asignando los valores de cada tag a cada variable asignada internamente
     //en el vector
@@ -118,8 +126,8 @@ function onDelete(event)//Función para eliminar una fila
     event.preventDefault();//Evita acciones como refrescar la página o sobreescribir el link
 
     /** @type {HTMLAnchorElement} *///Indicar y documentar el tipo de dato de la siguiente variable
-    const anchor = event.target;//Anclar al evento (parámetro) recibido
-    const tr = anchor.parentElement.parentElement;//Se obtiene el padre del padre, que sería el tag <tr>, la sucesión sería así: <a> -> <td> -> <tr>
+    const anchor = event.currentTarget;//Anclar al evento (parámetro) recibido
+    const tr = anchor.parentElement.parentElement.parentElement;//Se obtiene el padre del padre, que sería el tag <tr>, la sucesión sería así: <a> -> <td> -> <tr>
     
     tbody.removeChild(tr);//Al ya haber obtenido el padre del padre, que es una fila, se procede a eliminar esta del body.
 }
