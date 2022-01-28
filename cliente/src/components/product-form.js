@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";//La librería useState se usa para modificar los estados en React
 import { useDispatch, useSelector } from "react-redux"; //Dispatch para el uso de Redux con React
-import { agregarOModificarProducto } from "../store/store";//Import del método en el store/store
+import { useParams } from "react-router-dom";
+import { agregarOModificarProducto, productoSeleccionado } from "../store/store";//Import del método en el store/store
 
 const ProductForm = () => {
     //Categorías para agregar en el select de categorías
@@ -10,6 +11,8 @@ const ProductForm = () => {
         { codigo: 3, nombre: 'Categoría 3' },
         { codigo: 4, nombre: 'Categoría 4' }
     ];
+
+    const { codigo } = useParams();//Obtiene el código, gracias al patrón de link indicado en el archivo app.js. Me interesa sólo el código, por eso la sintaxis
     
     //Se obtiene el producto seleccionado
     const producto = useSelector((state) => state.producto);
@@ -34,7 +37,12 @@ const ProductForm = () => {
             cantidad: producto.cantidad || '',
             precio: producto.precio || '',
             categoria: producto.categoria || 1
-        }, [producto]);
+        })
+
+        if (codigo != producto.codigo){//Si el código del producto de la url es distinto al código del producto cargado en pantalla:
+            dispatch(productoSeleccionado(codigo));//Se selecciona a ese producto
+        }
+
     }, [producto]//Se está escuchando al estado, para sincronizar los cambios que se hacen, para que React se entere
     );
 

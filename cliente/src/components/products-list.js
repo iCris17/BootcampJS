@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { productoEliminado, productoSeleccionado } from "../store/store";
 
 const ProductItem = (prop) => {
@@ -14,13 +15,13 @@ const ProductItem = (prop) => {
             <td>{producto.total}</td>
             <td>
                 <div className="btn-group">
-                    <a 
+                    <Link 
                         title="Editar" 
-                        href="#" 
-                        className="btn btn-sm btn-outline-secondary" 
-                        onClick={() => acciones.seleccionar(producto.codigo)}>
+                        to={"editar/" + producto.codigo}
+                        className="btn btn-sm btn-outline-secondary" >
                         <i className="bi bi-pencil-square"></i>
-                    </a>
+                    </Link>{/*Se podrían usar links en lugar de etiquetas <a> siempre que se estén utilizando rutas */}
+                    {/* La propiedad to de arriba reescribe el resto del link del front */}
                     <a 
                         title="Eliminar" 
                         href="#" 
@@ -41,15 +42,22 @@ const ProductsList = () => {
     //Variable para acceder al dispatch
     const dispatch = useDispatch();
 
+    //Se usa cuando se van a hacer llamadas asíncronas, o se hace algo que afecte el renderizado de un componente
+    useEffect(() => {
+        dispatch({ type: "obtener-productos" });//Se hace un dispatch para obtener los productos
+    }, []//Dependencias para ejecutar el useEffect(), en este caso, se le dice que no lo ejecute sin importar que cambien las variables del dispatch()
+    )
+
     //Acción para seleccionar un producto
-    const seleccionar = (codigo) => dispatch(productoSeleccionado(codigo));
+    //Ya no se usa pues al momento de usar rutas, no sirve de nada
+    //const seleccionar = (codigo) => dispatch(productoSeleccionado(codigo));
     
     //Acción para eliminar un producto
     const eliminar = (codigo) => dispatch(productoEliminado(codigo));
     
     //Las acciones que se habían declarado, se agregan a este objeto de constantes
     const acciones = {
-        seleccionar,
+        //seleccionar,
         eliminar
     }
     

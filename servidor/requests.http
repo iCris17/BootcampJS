@@ -1,0 +1,30 @@
+### Home
+GET http://localhost:5001/
+//Se pone esto de abajo para que el plugin de requests detecte que este es otra ruta
+###Obtener productos
+GET http://localhost:5001/productos/
+### Crear producto
+POST http://localhost:5001/productos/
+//Tipo de contenido que se va a enviar
+Content-Type: application/json 
+
+{
+    "nombre": "Libro",
+    "cantidad": 2,
+    "precio": 20
+}
+### Modificar producto
+PUT http://localhost:5001/productos/4
+Content-Type: application/json
+
+{
+    "nombre": "Producto 2",
+    "cantidad": 4,
+    "precio": 40
+}
+### Obtener producto
+GET http://localhost:5001/productos/2
+### Filtrar productos
+GET http://localhost:5001/productos?filtro=Libro
+### Eliminar producto
+DELETE http://localhost:5001/productos/2

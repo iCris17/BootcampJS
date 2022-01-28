@@ -18,14 +18,15 @@ module.exports = {
         filename: "[name].[contenthash].js",//Nombre del archivo que se quiere
         path: path.resolve(__dirname, "dist"),//Folder a agregar el archivo. __dirname da la carpeta del archivo actual, el parámetro dist indica que
         //se almacene en esta carpeta el archivo especificado
-        publicPath: ""//Variable que de momento no se usa
+        publicPath: "/"//Variable que de momento no se usa, sirve para decir en dónde están todos los .js, que generalmente se encuentran en la raíz
     },
     //mode: "production",//Se indica un modo (producción) para optimizar lo más que pueda el código
     mode: mode,
     devServer: {//Indicar variables para nuestro entorno
         port: 5000,//Puerto en el que se va a abrir nuestra aplicación
         open: true,//Indicar que se abra el navegador por defecto
-        hot: true //Sólo se va a refrescar en el navegador lo que se necesita, no toda la página
+        hot: true, //Sólo se va a refrescar en el navegador lo que se necesita, no toda la página
+        historyApiFallback: true //Cuando no se conoce alguna ruta, lo que se hace es retornar el index.html de la carpeta public
     },
     module: {//Se especifican los módulos
         rules: [//Se especifican reglas para indicar a webpack cómo procesar cada archivo
