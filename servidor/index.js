@@ -1,17 +1,7 @@
 import express from "express";//Importe de la librería de express
 import cors from "cors";//Importe de los cors para permitir la conexión del front-end con el back-end
 import bodyParser from "body-parser";//Importe de esta librería para poder leer un request desde el servidor
-
-let lastId = 1;
-let productos = [ // Debería ser const pero se le pone let para evitar que cuando se elimine un arreglo, aparezca un null en lugar del producto eliminado
-    {
-        nombre: "Producto B",
-        cantidad: 1,
-        precio: 10,
-        codigo: lastId,
-        total: 10
-    }
-];
+import { productos } from "./database";
 
 const app = express();//Uso de express
 
@@ -21,27 +11,27 @@ app.use(logs);//Se despliega en la consola el request utilizado y la ruta
 
 app.get("/", (req, res) => res.send("<h1>API de productos</h1>"));//Ruta número 1 (la raíz)
 
-app.get("/productos", (req, res) => {
+app.get("/productos", async (req, res) => {
     const filtro = req.query.filtro;//Obtener el filtro del query
+    let result;
 
     if (filtro){//Si se obtiene un filtro:
-        res.json(productos.filter(p => p.nombre.indexOf(filtro) >= 0));//Se retornan los productos coincidentes con el filtro
+        result = await productos.filter(filtro);
     } else {//Si no:
-        res.json(productos);//Se retornan todos los productos
+        result = await productos.all();
     }
-    });//Ruta número 2
-app.post("/productos", (req, res) => {//Efectuar un post en esta ruta
-    lastId++;//Incrementar este contador en 1 para el código cada vez que se cree un producto
-    const { cantidad, precio } = req.body; //Obtener la cantidad y el precio del request del body
-    const producto = {...req.body, codigo: lastId, total: cantidad * precio};
-    productos.push(producto);//Se está agregando el arreglo de productos directamente
+    res.json(result);
+});//Ruta número 2
+
+app.post("/productos", async (req, res) => {//Efectuar un post en esta ruta
+    const producto = await productos.add(req.body);
     res.status(201);//Asignar el estado de la respuesta
     res.json(producto)//Asignar este archivo .json para la respuesta del POST
 });
 
-app.get("/productos/:codigo", (req, res) => {//Un put para un producto en específico
+app.get("/productos/:codigo", async (req, res) => {//Un put para un producto en específico
     const codigo = parseInt(req.params.codigo, 10);//Código recibido desde el request de usuario, convirtiéndolo a entero, en base 10 (lo que indica el segundo parámetro)
-    const producto = productos.find(p => p.codigo == codigo)//Obtener el producto solicitado
+    const producto = await productos.single(codigo);
     
     if (!producto)//Si el producto no existe
     {
@@ -53,38 +43,29 @@ app.get("/productos/:codigo", (req, res) => {//Un put para un producto en espec�
     }
 });
 
-app.put("/productos/:codigo", (req, res) => {//Un put para un producto en específico
+app.put("/productos/:codigo", async (req, res) => {//Un put para un producto en específico
     const codigo = parseInt(req.params.codigo, 10);//Código recibido desde el request de usuario, convirtiéndolo a entero, en base 10 (lo que indica el segundo parámetro)
-    const producto = productos.find(p => p.codigo == codigo)//Obtener el producto solicitado
-    
-    if (!producto)//Si el producto no existe
-    {
+    try {
+        const newProducto = await productos.update(codigo, req.body);    
+        res.status(200);
+        res.json(newProducto);
+    } catch (mensaje) {
         res.status(404);//Asignar el estado de la respuesta
-        res.json({ mensaje: "No existe ningún producto con código " + codigo })//Asignar este archivo .json para la respuesta del POST
-    } else {
-        const { cantidad, precio } = req.body; //Obtener la cantidad y el precio del request del body
-        const index = productos.indexOf(producto);//Buscar este producto en el arreglo de productos
-        const nuevoProducto = productos[index] = { ...req.body, codigo, total: cantidad * precio };//Se modifica el arreglo directamente, en el índice especificado
-        res.status(200);//Todo está bien
-        res.json(nuevoProducto);//Enviar un mensaje con el JSON del producto modificado con sus nuevos valores
+        res.json({ mensaje });//Asignar este archivo .json para la respuesta del POST
     }
 });
 
-app.delete("/productos/:codigo", (req, res) => {//Un delete para un producto en específico
+app.delete("/productos/:codigo", async (req, res) => {//Un delete para un producto en específico
     const codigo = parseInt(req.params.codigo, 10);//Código recibido desde el request de usuario, convirtiéndolo a entero, en base 10 (lo que indica el segundo parámetro)
-    const producto = productos.find(p => p.codigo == codigo)//Obtener el producto solicitado
-    
-    if (!producto)//Si el producto no existe
-    {
-        res.status(404);//Asignar el estado de la respuesta
-        res.json({ mensaje: "No existe ningún producto con código " + codigo })//Asignar este archivo .json para la respuesta del POST
-    } else {//Ahora bien, si el producto existe
-        productos = productos.filter(x => x != producto);//Reasignar todos los productos menos el eliminado
+
+    try {
+        await productos.remove(codigo);
         res.status(200);//Todo está bien
         res.json({ message: "Producto eliminado" });//Enviar un mensaje de que el producto se logró eliminar
+    } catch (mensaje) {
+        res.status(404);//Asignar el estado de la respuesta
+        res.json({ mensaje: "No existe ningún producto con código " + codigo })//Asignar este archivo .json para la respuesta del POST
     }
-
-
 });
 
 app.listen(5001, () => {

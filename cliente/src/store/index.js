@@ -30,7 +30,7 @@ const middlewares = applyMiddleware(
     //storage.generadorCodigoProductoBuilder(0),//Middleware para generar el código al momento de agregar un producto
     //storage.storageMiddleware, //Middleware para mantener productos almacenados en el navegador
 );//Esta función permite encadenar varios middlewares
-
+//Los reducers me permiten hacer cambios en los estados
 const reducer = combineReducers(
     {
         //Necesita una history, para controlar las rutas cuando cambian o se modifican
