@@ -30,7 +30,7 @@ app.post("/productos", async (req, res) => {//Efectuar un post en esta ruta
 });
 
 app.get("/productos/:codigo", async (req, res) => {//Un put para un producto en específico
-    const codigo = parseInt(req.params.codigo, 10);//Código recibido desde el request de usuario, convirtiéndolo a entero, en base 10 (lo que indica el segundo parámetro)
+    const codigo = req.params.codigo;//Código recibido desde el request de usuario
     const producto = await productos.single(codigo);
     
     if (!producto)//Si el producto no existe
@@ -44,7 +44,7 @@ app.get("/productos/:codigo", async (req, res) => {//Un put para un producto en 
 });
 
 app.put("/productos/:codigo", async (req, res) => {//Un put para un producto en específico
-    const codigo = parseInt(req.params.codigo, 10);//Código recibido desde el request de usuario, convirtiéndolo a entero, en base 10 (lo que indica el segundo parámetro)
+    const codigo = req.params.codigo;//Código recibido desde el request de usuario
     try {
         const newProducto = await productos.update(codigo, req.body);    
         res.status(200);
@@ -56,7 +56,7 @@ app.put("/productos/:codigo", async (req, res) => {//Un put para un producto en 
 });
 
 app.delete("/productos/:codigo", async (req, res) => {//Un delete para un producto en específico
-    const codigo = parseInt(req.params.codigo, 10);//Código recibido desde el request de usuario, convirtiéndolo a entero, en base 10 (lo que indica el segundo parámetro)
+    const codigo = req.params.codigo;//Código recibido desde el request de usuario
 
     try {
         await productos.remove(codigo);

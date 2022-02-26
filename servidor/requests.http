@@ -3,28 +3,29 @@ GET http://localhost:5001/
 ###Se pone esto de abajo para que el plugin de requests detecte que este es otra ruta
 ###Obtener productos
 GET http://localhost:5001/productos
-Authorization: hola-mundo
 ### Crear producto
 POST http://localhost:5001/productos
-##Tipo de contenido que se va a enviar
 Content-Type: application/json 
+
 {
-    "nombre": "Libro",
-    "categoria": 1,
-    "cantidad": 2,
-    "precio": 20
+    "nombre": "Lápiz",
+    "categoria": 2,
+    "cantidad": 100,
+    "precio": 2
 }
 ### Modificar producto
-PUT http://localhost:5001/productos/2
+PUT http://localhost:5001/productos/620c2a60ced1d25de4a2f7e7
 Content-Type: application/json
+
 {
-    "nombre": "Producto 2",
+    "nombre": "Producto 1 2.0",
     "cantidad": 4,
-    "precio": 40
+    "precio": 40,
+    "categoria": 2
 }
-### Obtener producto
-GET http://localhost:5001/productos/2
+### Obtener un producto en específico
+GET http://localhost:5001/productos/621968f3f1572c44aa657637
 ### Filtrar productos
 GET http://localhost:5001/productos?filtro=Libro
 ### Eliminar producto
-DELETE http://localhost:5001/productos/2
+DELETE http://localhost:5001/productos/620c2a60ced1d25de4a2f7e7
