@@ -6,6 +6,9 @@
     "build": "webpack --mode=production",
     "start": "webpack serve"
   },
+  "scripts-comments": {
+    "build": "El --mode=production indica que la aplicación se va a construir para el modo de producción"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iCris17/BootcampJS.git"
@@ -18,6 +21,7 @@
   },
   "homepage": "https://github.com/iCris17/BootcampJS#readme",
   "private": true,
+  "privateComment": "El private indica si el código de esta librería se publica en la página de npm, si es true, no se hará",
   "dependencies": {
     "@babel/runtime": "^7.16.7",
     "axios": "^0.24.0",
@@ -30,6 +34,9 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.3.0",
     "redux": "^4.1.2"
+  },
+  "dependenciesComments": {
+    "redux": "El ^ indica que se puede hacer un upgrade de la versión actual"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",

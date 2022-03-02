@@ -1,0 +1,57 @@
+Cliente:
+-npm init -y: Inicializar en el proyecto el node package management, el -y sirve para decir sí a todas las preguntas que se me pudieran plantear, generando un package.json
+-npm install --save redux: Para instalar redux en el proyecto
+-npm install --save bootstrap@5.1.3: Para installar bootstrap en su versión 5.1.3
+-npm install --save bootstrap-icons@1.7.0: Para installar bootstrap en su versión 1.7.0
+-npm install --save-dev webpack webpack-cli: Para instalar webpack y webpack-cli. Webpack es el programa que permite empaquetar toda la utilería del proyecto, y webpack-cli
+es el cliente que permite usar comandos, para realizar el empaquetado
+-npm install react react-dom: Para instalar react y react-dom es para poder usar react en la web
+-npm install -D @babel/core @babel/preset-env @babel/preset-react babel-loader: Se instalan estos tres paquetes, babel/core es la lógica inicial de babel, babel/preset-env 
+sirve para que webpack entienda la sintaxis de JavaScript, y babel/preset-react es para que webpack entienda la lógica de html y react, y por último, babel-loader permite
+conectar webpack con babel.
+-npm install -D html-webpack-plugin: Se instala para poder empaquetar en la carpeta /dist el html
+-npm i -D clean-webpack-plugin: Se instala para limpiar la carpeta /dist
+-npm install -D style-loader css-loader: Se instala para que webpack reconozca estilos de .css importados
+-npm install -D mini-css-extract-plugin: Se instala para bajar el peso del archivo del javascript minificado
+-npm install -D webpack-dev-server: Se instala para permitir que codifiquemos y se vayan observando los cambios
+-npm install -D @pmmmwh/react-refresh-webpack-plugin react-refresh
+-npx create-react-app <nombre_aplicación>: Crea una aplicación de react, con las dependencias necesarias, además de que configura webpack por nosotros.
+-npm install --save react-redux: Se instala para que se pueda utilizar redux con react
+-npm install --save react-router-dom@5: Sirve para manejar las rutas en react, se instala en específico la versión 5 pues la más reciente parece ser que no maneja todavía
+el uso de redux.
+-npm install --save connected-react-router: Sirve para conectar las rutas de router con redux, permitiendo el uso de middlewares, por ejemplo.
+Servidor:
+-npm install --save express: Se instala la librería express
+-npm install --save body-parser: Librería que provee ciertos middlewares. Para este proyecto se usó para obtener los datos de tipo application/json en los request y facilitar la
+lectura de los JSON
+-npm install --save-dev nodemon: Se instala para sincronizar los cambios con el navegador, para que cuando existan cambios, no sea necesario detener el servidor.
+-npm install --save axios: Se instala para facilitar el uso de requests http en el backend, al momento de escribir código, así como facilitar la lectura de los JSON.
+-npm install --save @babel/runtime y npm install --save-dev @babel/plugin-transform-runtime: Se instalan pues, entre la interacción de babel y webpack, no les es posible
+transformar la sintaxis de async y await para algunas versiones de algunos navegadores, para evitar ese problema, se instalan estas librerías.
+-npm install --save mongoose: Este es un cliente que se utiliza para comunicarse con la BD de Mongo.
+-npm install dotenv: Permite la creación de un archivo .env, para extraer variables de entorno de allí, que me pueden servir para autenticarme a la BD.
+Extras:
+-gitignore.io: Página para generar archivos .gitignore
+-Las librerías que se instalan con --save-dev son dependencias para el entorno de desarrollo únicamente, pero en un ambiente de producción no se llegan a usar, ni son
+necesarias.
+-git clean -fdx: Este comando forza el eliminado de archivos, directorios y archivos sin versionar (sin hacer commit).
+-npm install: Se instalan de nuevo las dependencias por si hacen falta
+Plugins (* no sé cómo funcionan):
+-Version Lens: Indica si alguna dependencia puede ser actualizada o no.
+-Bracket Pair Colorizer: Permite visualizar de una manera mucho más sencilla la indentación entre funciones, condiciones, etc.
+-*Docker: Facilita el manejo de archivos de Docker.
+-*ESLint: Es una herramienta que identifica errores en código JavaScript y los reporta.
+-*Git History: Se ven los logs, se comparan branches y commits de un repositorio.
+-*Git Project Manager: Permite cambiar entre carpetas de proyectos de git.
+-*Git Lens: Permite ver el autor del código, así como revisar versiones de un mismo archivo, entre otras características.
+-*JShint: Es una herramienta que ayuda brindando sugerencias para mejorar el código JavaScript.
+-*Live Server: Sincroniza los cambios hechos en el proyecto para que se vean actualizados, sin necesidad de cerrar el localhost y volver a cargarlo.
+-*npm: Permite el uso de scripts definidos en el package.json así como verificar que las dependencias estén instaladas según el package.json.
+-*npm Intellisense: Autocompleta los importes de las dependencias instaladas en un package.json.
+-*Prettier: El código lo estructura de una manera más elegante.
+-*pubmanager: Muestra si hay nuevas actualizaciones de paquetes pub.
+-*Remote - Containers: Abre repositorios de Docker y explota las funcionalidades de VS para facilitar el uso del mismo repositorio.
+-REST Client: Es un cliente utilizado para hacer requests HTTP.
+-*Stylelint: Se usa para el CSS; ayuda a evitar errores y a cumplir convenciones con los estilos.
+-*Version Lens: Muestra la última versión de cada paquete.
+-vscode-icons: Inserta una imagen antes del nombre de archivo para cada archivo de VS, para identificar de forma más fácil el tipo de archivo que es.

@@ -7,6 +7,9 @@
   "scripts": {
     "start": "nodemon --es-module-specifier-resolution=node -r dotenv/config index.js"
   },
+  "scripts-comments":{
+    "start": "--es-module-specifier-resolution=node permite reconocer los imports para cuando no se agrega /index.js y se quiere reconocer por defecto ese archivo"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
